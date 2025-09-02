@@ -11,10 +11,16 @@
 </p>
 
 @{
-    if (TempData["SuccessMessage"] != null)
+    if (TempData["InsertMessage"] != null)
     {
         <div class="alert alert-success">
             @TempData["SuccessMessage"]
+        </div>
+    }
+    if (TempData["UpdateMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["UpdateMessage"]
         </div>
     }
 }
