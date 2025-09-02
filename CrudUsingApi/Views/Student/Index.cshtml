@@ -23,6 +23,12 @@
             @TempData["UpdateMessage"]
         </div>
     }
+    if (TempData["DeleteMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["DeleteMessage"]
+        </div>
+    }
 }
 <table class="table">
     <thead>
