@@ -56,18 +56,19 @@ namespace CrudUsingApi.Controllers
                 var data = JsonConvert.DeserializeObject<Student>(result);
                 if (data != null)
                 {
-                  std = data;
+                    std = data;
                 }
             }
             return View(std);
         }
+
 
         [HttpPost]
         public IActionResult Edit(Student student)
         {
             string data = JsonConvert.SerializeObject(student);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.PutAsync(url + "/" +student.id, content).Result;
+            HttpResponseMessage response = client.PutAsync(url + "/" + student.id, content).Result;
             if (response.IsSuccessStatusCode)
             {
                 TempData["UpdateMessage"] = "Record Updated Successfully";
@@ -75,6 +76,24 @@ namespace CrudUsingApi.Controllers
             }
             return View();
         }
+
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            Student std = new Student();
+            HttpResponseMessage response = client.GetAsync(url + "/" + id).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string result = response.Content.ReadAsStringAsync().Result;
+                var data = JsonConvert.DeserializeObject<Student>(result);
+                if (data != null)
+                {
+                    std = data;
+                }
+            }
+            return View(std);
+        }
+
 
     }
 }
